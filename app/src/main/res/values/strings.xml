@@ -10,4 +10,12 @@
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Contacts-->
+    <string name="hospital">Эмнэлэг</string>
+    <string name="hospitalCatListing">Жагсаалтанд 12 байна</string>
+    <string name="doctor">Хүүхдийн эмч</string>
+    <string name="doctorCatListing">Жагсаалтанд 10 байна</string>
+    <string name="masseur">Бариач</string>
+    <string name="masseurCatListing">Жагсаалтанд 5 байна</string>
+
 </resources>

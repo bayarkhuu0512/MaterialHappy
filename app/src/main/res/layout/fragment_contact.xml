@@ -1,6 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:weightSum="3"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:background="@drawable/contact_bg1_selector"
+        android:id="@+id/hospitalContainer">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hospital"
+                android:padding="10dp"
+                android:textSize="32dp"
+                android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:id="@+id/hospitalCatName" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/doctorCatListing"
+            android:padding="10dp"
+            android:textSize="18dp"
+            android:textColor="@android:color/white"
+            android:id="@+id/hospitalCatListing" />
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:background="@drawable/contact_bg2_selector">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/doctor"
+            android:padding="10dp"
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:id="@+id/doctorCatName" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/doctorCatListing"
+            android:padding="10dp"
+            android:textSize="18dp"
+            android:textColor="@android:color/white"
+            android:id="@+id/doctorCatListing" />
+        </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/contact_bg3_selector">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/masseur"
+            android:padding="10dp"
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:id="@+id/masseurCatName" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/masseurCatListing"
+            android:padding="10dp"
+            android:textSize="18dp"
+            android:textColor="@android:color/white"
+            android:id="@+id/masseurCatListing" />
+    </LinearLayout>
+    </LinearLayout>
+</ScrollView>

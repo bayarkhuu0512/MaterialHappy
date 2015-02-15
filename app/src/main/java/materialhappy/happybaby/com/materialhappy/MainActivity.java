@@ -23,6 +23,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.contact.ContactFragment;
+
 
 public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -60,7 +62,7 @@ public class MainActivity extends Activity
 //        fragmentManager.beginTransaction()
 //                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
 //                .commit();
-        PlaceholderFragment fragment = new PlaceholderFragment();
+        ContactFragment fragment = new ContactFragment();
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
