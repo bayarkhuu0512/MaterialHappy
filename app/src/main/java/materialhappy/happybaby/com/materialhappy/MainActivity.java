@@ -10,6 +10,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.transition.Explode;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,12 +23,26 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.contact.ContactFragment;
 
 
 public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
+    private String TAG=MainActivity.this.getClass().getName();
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -52,6 +67,58 @@ public class MainActivity extends Activity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        Log.d(TAG,"OnCreate()");
+
+        JsonArrayRequest req = new JsonArrayRequest("http://happybaby.mn/app/contacts.php",
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d(TAG, response.toString());
+
+//                        try {
+//                            // Parsing json array response
+//                            // loop through each json object
+//                            jsonResponse = "";
+//                            for (int i = 0; i < response.length(); i++) {
+//
+//                                JSONObject person = (JSONObject) response
+//                                        .get(i);
+//
+//                                String name = person.getString("name");
+//                                String email = person.getString("email");
+//                                JSONObject phone = person
+//                                        .getJSONObject("phone");
+//                                String home = phone.getString("home");
+//                                String mobile = phone.getString("mobile");
+//
+//                                jsonResponse += "Name: " + name + "\n\n";
+//                                jsonResponse += "Email: " + email + "\n\n";
+//                                jsonResponse += "Home: " + home + "\n\n";
+//                                jsonResponse += "Mobile: " + mobile + "\n\n\n";
+//
+//                            }
+//
+//                            txtResponse.setText(jsonResponse);
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                            Toast.makeText(getApplicationContext(),
+//                                    "Error: " + e.getMessage(),
+//                                    Toast.LENGTH_LONG).show();
+//                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        HappyApplication.getInstance().getRequestQueue().add(req);
 
     }
 
