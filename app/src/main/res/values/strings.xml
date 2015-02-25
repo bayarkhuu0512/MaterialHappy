@@ -9,7 +9,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
-
+    <!--SplashScreen-->
+    <string name="loading">Түр хүлээнэ үү</string>
     <!-- Contacts-->
     <string name="hospital">Эмнэлэг</string>
     <string name="hospitalCatListing">Жагсаалтанд 12 байна</string>
