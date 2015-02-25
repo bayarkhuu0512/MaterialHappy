@@ -1,40 +1,30 @@
 package materialhappy.happybaby.com.materialhappy;
 
-import android.animation.Animator;
-import android.app.Activity;
-
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.transition.Explode;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.view.Window;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.contact.ContactFragment;
 
@@ -75,7 +65,8 @@ public class MainActivity extends Activity
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.d(TAG, response.toString());
-
+                        Toast.makeText(getApplicationContext(),
+                                response.toString(), Toast.LENGTH_LONG).show();
 //                        try {
 //                            // Parsing json array response
 //                            // loop through each json object
@@ -117,6 +108,8 @@ public class MainActivity extends Activity
                         error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+
+
 
         HappyApplication.getInstance().getRequestQueue().add(req);
 
