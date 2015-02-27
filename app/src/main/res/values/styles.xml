@@ -4,5 +4,14 @@
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <item name="android:windowBackground">@color/windowBackground</item>
     </style>
+<!--    <style name="StyledIndicators" parent="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+        <item name="vpiCirclePageIndicatorStyle">@style/CustomCirclePageIndicator</item>
+    </style>
 
+    <style name="CustomCirclePageIndicator">
+        <item name="fillColor">@color/entity_feed</item>
+        <item name="radius">5dp</item>
+        <item name="pageColor">@android:color/white</item>
+        <item name="centered">true</item>
+    </style>-->
 </resources>
