@@ -14,7 +14,7 @@ import materialhappy.happybaby.com.materialhappy.R;
 /**
  * Created by BayarkhuuWork on 2/15/2015.
  */
-public class ContactFragment extends Fragment{
+public class ContactCategoryFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

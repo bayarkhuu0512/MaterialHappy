@@ -42,9 +42,9 @@ public class LoadBaseDataSplashScreenActivity extends Activity implements Consta
 
         if(DEBUG)
         {
-            prefManager.setInitDataPreparedSetup(false);
+            prefManager.setInitDataPrepared(false);
         }
-        if (prefManager.getInitDataPreparedSetup()) {
+        if (prefManager.getInitDataPrepared()) {
 
             launchWalkthroughActivity();
 
@@ -129,7 +129,7 @@ public class LoadBaseDataSplashScreenActivity extends Activity implements Consta
 
     private void launchWalkthroughActivity() {
         Intent intent = new Intent(this, WalkthroughActivity.class);
-        prefManager.setInitDataPreparedSetup(true);
+        prefManager.setInitDataPrepared(true);
         startActivity(intent);
         finish();
     }

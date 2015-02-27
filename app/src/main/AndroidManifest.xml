@@ -27,17 +27,21 @@
             android:label="@string/app_name"
             >
         </activity>
-    <!--    <activity
+        <activity
         android:name=".materialhappy.happybaby.com.materialhappy.init.WalkthroughActivity"
         android:screenOrientation="portrait"
-        android:theme="@style/StyledIndicators"
         >
-        </activity>-->
+        </activity>
         <activity
             android:name=".materialhappy.happybaby.com.materialhappy.init.TermOfUseActivity"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
             >
             </activity>
+        <activity
+            android:name=".materialhappy.happybaby.com.materialhappy.init.SetupUserDataActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
     </application>
 
 </manifest>

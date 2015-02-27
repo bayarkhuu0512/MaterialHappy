@@ -13,26 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.ParseError;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.JsonArrayRequest;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
-
-import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.contact.ContactFragment;
-import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.utils.Titanic;
+import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.contact.ContactCategoryFragment;
 
 
 public class MainActivity extends Activity
@@ -83,7 +65,7 @@ public class MainActivity extends Activity
 //        fragmentManager.beginTransaction()
 //                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
 //                .commit();
-        ContactFragment fragment = new ContactFragment();
+        ContactCategoryFragment fragment = new ContactCategoryFragment();
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)

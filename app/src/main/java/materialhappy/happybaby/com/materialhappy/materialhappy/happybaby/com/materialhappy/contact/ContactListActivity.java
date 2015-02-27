@@ -1,39 +1,43 @@
 package materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.contact;
 
-import android.app.ListActivity;
-import android.os.AsyncTask;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONObject;
-
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import materialhappy.happybaby.com.materialhappy.R;
+import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.entities.Contact;
 
 /**
  * Created by BayarkhuuWork on 2/15/2015.
  */
-public class ContactListActivity extends ListActivity {
+public class ContactListActivity extends Activity {
+    private List<Contact> contacts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.contact_list);
-       // Volley
-
-        // getActionBar().setDisplayHomeAsUpEnabled(true);
-        String[] values = new String[]{"Android", "iPhone", "WindowsMobile",
-                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-                "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
-                "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-                "Android", "iPhone", "WindowsMobile"};
-        ArrayAdapter<String> codeLearnArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, values);
-        setListAdapter(codeLearnArrayAdapter);
+        setContentView(R.layout.contact_view);
+        RecyclerView recyclerView = (RecyclerView)
+                findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        contacts = new ArrayList<Contact>();
+        Contact contact1 = new Contact();
+        contact1.setAddress("aaa");
+        contact1.setName("bbb");
+        contact1.setPhone1("444");
+        contacts.add(contact1);
+        if (contacts != null) {
+            ContactListAdapter adapter = new ContactListAdapter(this, contacts);
+            recyclerView.setAdapter(adapter);
+        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

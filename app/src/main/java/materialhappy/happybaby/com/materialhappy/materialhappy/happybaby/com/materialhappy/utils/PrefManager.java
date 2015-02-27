@@ -41,12 +41,30 @@ public class PrefManager implements Constants {
 		editor.commit();
 	}
 
-	public boolean getInitDataPreparedSetup() {
+	public boolean getInitDataPrepared() {
 		return pref.getBoolean(PREF_INIT_DATAPREPARED, false);
 	}
 
-	public void setInitDataPreparedSetup(boolean hasSetup) {
-		editor.putBoolean(PREF_INIT_DATAPREPARED, hasSetup);
+	public void setInitDataPrepared(boolean prepared) {
+		editor.putBoolean(PREF_INIT_DATAPREPARED, prepared);
 		editor.commit();
 	}
+
+    public boolean getInitWalkThroughViewed() {
+        return pref.getBoolean(PREF_INIT_WALKTHROUGHVIEWED, false);
+    }
+
+    public void setInitWalkThroughViewed(boolean viewed) {
+        editor.putBoolean(PREF_INIT_WALKTHROUGHVIEWED, viewed);
+        editor.commit();
+    }
+
+    public boolean getInitHasSetup() {
+        return pref.getBoolean(PREF_INIT_HASSETUP, false);
+    }
+
+    public void setInitHasSetup(boolean setup) {
+        editor.putBoolean(PREF_INIT_HASSETUP, setup);
+        editor.commit();
+    }
 }
