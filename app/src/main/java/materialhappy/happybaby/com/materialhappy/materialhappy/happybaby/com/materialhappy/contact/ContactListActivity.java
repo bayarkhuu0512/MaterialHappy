@@ -8,10 +8,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.Where;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import materialhappy.happybaby.com.materialhappy.R;
+import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.db.DatabaseHelper;
 import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.entities.Contact;
 
 /**
@@ -19,6 +26,9 @@ import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.mat
  */
 public class ContactListActivity extends Activity {
     private List<Contact> contacts;
+    private DatabaseHelper databaseHelper = null;
+    private Dao<Contact, Integer> contactDAO;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,15 +38,42 @@ public class ContactListActivity extends Activity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        contacts = new ArrayList<Contact>();
-        Contact contact1 = new Contact();
-        contact1.setAddress("aaa");
-        contact1.setName("bbb");
-        contact1.setPhone1("444");
-        contacts.add(contact1);
+
+        try {
+            contactDAO = getHelper().getContactDao();
+//            QueryBuilder<Contact, Integer> contactQb = contactDAO
+//                    .queryBuilder();
+         //   Where where = contactQb.where();
+            contacts = contactDAO.queryForAll();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         if (contacts != null) {
             ContactListAdapter adapter = new ContactListAdapter(this, contacts);
             recyclerView.setAdapter(adapter);
+        }
+    }
+
+    private DatabaseHelper getHelper() {
+        if (databaseHelper == null) {
+            databaseHelper = OpenHelperManager.getHelper(this,
+                    DatabaseHelper.class);
+        }
+        return databaseHelper;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+		/*
+		 * You'll need this in your class to release the helper when done.
+		 */
+        if (databaseHelper != null) {
+            OpenHelperManager.releaseHelper();
+            databaseHelper = null;
         }
     }
     @Override

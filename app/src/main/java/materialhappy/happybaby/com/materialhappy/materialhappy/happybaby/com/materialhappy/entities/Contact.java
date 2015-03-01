@@ -1,17 +1,36 @@
 package materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.entities;
 
+
+import com.j256.ormlite.field.DatabaseField;
+
 import java.io.Serializable;
 
 /**
  * Created by BayarkhuuWork on 2/25/2015.
  */
 public class Contact implements Serializable {
+
+    private static final long serialVersionUID = -3002412614298570971L;
+
+    @DatabaseField(generatedId = true)
     int id;
+
+    @DatabaseField
     String type;
+
+    @DatabaseField
     String name;
+
+    @DatabaseField
     String address;
+
+    @DatabaseField
     String phone1;
+
+    @DatabaseField
     String phone2;
+
+    @DatabaseField
     String phone3;
 
     public int getId() {
