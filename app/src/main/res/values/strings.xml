@@ -13,10 +13,8 @@
     <string name="loading">Түр хүлээнэ үү</string>
     <!-- Contacts-->
     <string name="hospital">Эмнэлэг</string>
-    <string name="hospitalCatListing">Жагсаалтанд 12 байна</string>
     <string name="doctor">Хүүхдийн эмч</string>
-    <string name="doctorCatListing">Жагсаалтанд 10 байна</string>
     <string name="masseur">Бариач</string>
-    <string name="masseurCatListing">Жагсаалтанд 5 байна</string>
+    <string name="catListingNum">Жагсаалтанд %1$d байна</string>
 
 </resources>

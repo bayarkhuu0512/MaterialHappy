@@ -31,4 +31,9 @@ public interface Constants {
 
     public static boolean DEBUG = false;
 
+    public static int CONTACT_HOSPITAL = 1;
+    public static int CONTACT_DOCTOR = 2;
+    public static int CONTACT_MASSEUR = 3;
+
+
 }

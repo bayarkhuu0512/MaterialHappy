@@ -1,6 +1,7 @@
 package materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.contact;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,11 +21,12 @@ import java.util.List;
 import materialhappy.happybaby.com.materialhappy.R;
 import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.db.DatabaseHelper;
 import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.entities.Contact;
+import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.utils.Constants;
 
 /**
  * Created by BayarkhuuWork on 2/15/2015.
  */
-public class ContactListActivity extends Activity {
+public class ContactListActivity extends Activity implements Constants{
     private List<Contact> contacts;
     private DatabaseHelper databaseHelper = null;
     private Dao<Contact, Integer> contactDAO;
@@ -33,6 +35,9 @@ public class ContactListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contact_view);
+        Intent intent = getIntent();
+        int type = intent.getIntExtra("type", CONTACT_HOSPITAL);
+
         RecyclerView recyclerView = (RecyclerView)
                 findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -41,11 +46,11 @@ public class ContactListActivity extends Activity {
 
         try {
             contactDAO = getHelper().getContactDao();
-//            QueryBuilder<Contact, Integer> contactQb = contactDAO
-//                    .queryBuilder();
-         //   Where where = contactQb.where();
-            contacts = contactDAO.queryForAll();
-
+            QueryBuilder<Contact, Integer> contactQb = contactDAO
+                    .queryBuilder();
+            Where where = contactQb.where();
+            where.eq("type",type);
+            contacts = contactQb.query();
         } catch (SQLException e) {
             e.printStackTrace();
         }
