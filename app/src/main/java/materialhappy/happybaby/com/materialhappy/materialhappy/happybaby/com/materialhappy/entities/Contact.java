@@ -22,7 +22,13 @@ public class Contact implements Serializable {
     String name;
 
     @DatabaseField
+    String imagePath;
+
+    @DatabaseField
     String address;
+
+    @DatabaseField
+    String district;
 
     @DatabaseField
     String phone1;
@@ -57,6 +63,7 @@ public class Contact implements Serializable {
         this.name = name;
     }
 
+
     public String getAddress() {
         return address;
     }
@@ -89,4 +96,19 @@ public class Contact implements Serializable {
         this.phone3 = phone3;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
 }

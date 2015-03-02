@@ -147,7 +147,9 @@ public class LoadBaseDataSplashScreenActivity extends Activity implements Consta
                                 contact.setId(Integer.parseInt(contactJson.getString("id")));
                                 contact.setType(contactJson.getString("type"));
                                 contact.setName(contactJson.getString("name"));
+                                contact.setImagePath(contactJson.getString("imagepath"));
                                 contact.setAddress(contactJson.getString("address"));
+                                contact.setDistrict(contactJson.getString("district"));
                                 contact.setPhone1(contactJson.getString("phonenumber1"));
                                 contact.setPhone2(contactJson.getString("phonenumber2"));
                                 contact.setPhone3(contactJson.getString("phonenumber3"));

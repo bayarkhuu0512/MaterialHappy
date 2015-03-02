@@ -6,5 +6,6 @@
     <color name="navigationBar">#ffcd19</color>
     <color name="windowBackground">#fff647</color>
     <color name="appColor">#fff647</color>
+    <color name="contactBackground">#bab4b4</color>
 
 </resources>

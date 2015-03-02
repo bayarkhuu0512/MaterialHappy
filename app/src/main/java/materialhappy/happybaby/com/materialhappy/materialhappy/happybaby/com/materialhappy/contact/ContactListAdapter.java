@@ -47,14 +47,14 @@ public class ContactListAdapter extends
         contact = mList.get(position);
 
         viewHolder.name.setTypeface(roboto_light);
-        viewHolder.address.setTypeface(roboto_light);
+      //  viewHolder.address.setTypeface(roboto_light);
 //        viewHolder.type.setTypeface(roboto_light);
 //        viewHolder.phone1.setTypeface(roboto_light);
 //        viewHolder.phone2.setTypeface(roboto_light);
 //        viewHolder.phone3.setTypeface(roboto_light);
 
         viewHolder.name.setText(contact.getName());
-        viewHolder.address.setText(contact.getAddress());
+    //    viewHolder.address.setText(contact.getAddress());
 
     }
 
@@ -74,7 +74,7 @@ public class ContactListAdapter extends
         public ViewHolder(View v) {
             super(v);
             name = (TextView) v.findViewById(R.id.name);
-            address = (TextView) v.findViewById(R.id.shortAddress);
+//            address = (TextView) v.findViewById(R.id.shortAddress);
 //            type = (TextView) v.findViewById(R.id.type);
 //            phone1 = (TextView) v.findViewById(R.id.phone1);
 //            phone2 = (TextView) v.findViewById(R.id.phone2);
