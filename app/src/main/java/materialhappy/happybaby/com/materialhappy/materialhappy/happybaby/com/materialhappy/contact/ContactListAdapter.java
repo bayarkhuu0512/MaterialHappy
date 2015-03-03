@@ -69,7 +69,7 @@ public class ContactListAdapter extends
 
        // Bitmap bitmap = BitmapFactory.decodeFile(mContext.getApplicationInfo().dataDir+"app_images/berry-angled2.png");
         Drawable d = Drawable.createFromPath(mContext.getApplicationInfo().dataDir+"/"+CONTACT_IMAGES_DIR+"/berry-angled2.png");
-        viewHolder.imageLayout.setBackgroundDrawable(d);
+      //  viewHolder.imageLayout.setBackgroundDrawable(d);
       //  viewHolder.imageLayout.setBackgroundResource(R.drawable.contact_bg1);
 
         if(position%2==0) {

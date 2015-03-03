@@ -23,6 +23,7 @@
             <RelativeLayout
                 android:id="@+id/imageLayout"
                 android:layout_width="80dp"
+                android:background="@drawable/contact_bg1"
                 android:layout_height="match_parent">
 
                 <ImageView
@@ -66,13 +67,14 @@
                         android:id="@+id/district"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="district"
+                        android:text="distric"
                         android:textColor="@android:color/black" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
