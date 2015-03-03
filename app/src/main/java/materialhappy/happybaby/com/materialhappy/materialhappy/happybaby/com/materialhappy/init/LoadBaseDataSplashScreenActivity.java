@@ -2,10 +2,12 @@ package materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.ma
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.NetworkResponse;
@@ -13,6 +15,7 @@ import com.android.volley.ParseError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
@@ -37,19 +40,19 @@ import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.mat
 /**
  * Created by BayarkhuuWork on 2/25/2015.
  */
-public class LoadBaseDataSplashScreenActivity extends Activity implements Constants{
-    private String TAG=LoadBaseDataSplashScreenActivity.this.getClass().getName();
+public class LoadBaseDataSplashScreenActivity extends Activity implements Constants {
+    private String TAG = LoadBaseDataSplashScreenActivity.this.getClass().getName();
     private PrefManager prefManager;
     private Dao<Contact, Integer> contactDAO;
     private DatabaseHelper databaseHelper = null;
-
+    private ImageView image;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loadingdatasplashscreen);
+        image = (ImageView) findViewById(R.id.image);
         prefManager = new PrefManager(this);
-        if(DEBUG)
-        {
+        if (DEBUG) {
             prefManager.setInitDataPrepared(false);
         }
         if (prefManager.getInitDataPrepared()) {
@@ -71,10 +74,10 @@ public class LoadBaseDataSplashScreenActivity extends Activity implements Consta
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                          //  try {
+                            //  try {
 
-                                Log.d(TAG, response.toString());
-                           new LongOperation().execute(response);
+                            Log.d(TAG, response.toString());
+                            new LongOperation().execute(response);
 
 //                            Toast.makeText(getApplicationContext(),
 //                                    response.toString(), Toast.LENGTH_LONG).show();
@@ -131,49 +134,60 @@ public class LoadBaseDataSplashScreenActivity extends Activity implements Consta
             HappyApplication.getInstance().getRequestQueue().add(req);
         }
     }
+
     private class LongOperation extends AsyncTask<JSONArray, Void, String> {
 
         @Override
         protected String doInBackground(JSONArray... params) {
             try {
-                            // Parsing json array response
-                            // loop through each json object
-                            for (int i = 0; i < params[0].length(); i++) {
+                // Parsing json array response
+                // loop through each json object
+                for (int i = 0; i < params[0].length(); i++) {
 
-                                JSONObject contactJson = (JSONObject) params[0]
-                                        .get(i);
+                    JSONObject contactJson = (JSONObject) params[0]
+                            .get(i);
 
-                                Contact contact = new Contact();
-                                contact.setId(Integer.parseInt(contactJson.getString("id")));
-                                contact.setType(contactJson.getString("type"));
-                                contact.setName(contactJson.getString("name"));
-                                contact.setImagePath(contactJson.getString("imagepath"));
-                                contact.setAddress(contactJson.getString("address"));
-                                contact.setDistrict(contactJson.getString("district"));
-                                contact.setPhone1(contactJson.getString("phonenumber1"));
-                                contact.setPhone2(contactJson.getString("phonenumber2"));
-                                contact.setPhone3(contactJson.getString("phonenumber3"));
-                                try {
-                                    contactDAO = getHelper().getContactDao();
-                                    contactDAO.create(contact);
-                                } catch (SQLException e) {
-                                    e.printStackTrace();
-                                }
-                            }
+                    Contact contact = new Contact();
+                    contact.setId(Integer.parseInt(contactJson.getString("id")));
+                    contact.setType(contactJson.getString("type"));
+                    contact.setName(contactJson.getString("name"));
+                    contact.setImagePath(contactJson.getString("imagepath"));
+                    contact.setAddress(contactJson.getString("address"));
+                    contact.setDistrict(contactJson.getString("district"));
+                    contact.setPhone1(contactJson.getString("phonenumber1"));
+                    contact.setPhone2(contactJson.getString("phonenumber2"));
+                    contact.setPhone3(contactJson.getString("phonenumber3"));
+                    try {
+                        contactDAO = getHelper().getContactDao();
+                        contactDAO.create(contact);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(getApplicationContext(),
-                                    "Error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG).show();
-                        }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(),
+                        "Error: " + e.getMessage(),
+                        Toast.LENGTH_LONG).show();
+            }
 
-                return null;
+            ImageRequest ir = new ImageRequest("http://happybaby.mn/img/happybaby/logo.png", new Response.Listener<Bitmap>() {
+                @Override
+                public void onResponse(Bitmap response) {
+
+                    image.setImageBitmap(response);
+
+                }
+            }, 0, 0, null, null);
+            HappyApplication.getInstance().getRequestQueue().add(ir);
+
+            return null;
         }
 
         @Override
         protected void onPostExecute(String result) {
-                launchWalkthroughActivity();
+            launchWalkthroughActivity();
         }
 
         @Override
@@ -192,18 +206,20 @@ public class LoadBaseDataSplashScreenActivity extends Activity implements Consta
         }
         return databaseHelper;
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
 		/*
-		 * You'll need this in your class to release the helper when done.
+         * You'll need this in your class to release the helper when done.
 		 */
         if (databaseHelper != null) {
             OpenHelperManager.releaseHelper();
             databaseHelper = null;
         }
     }
+
     private void launchWalkthroughActivity() {
         Intent intent = new Intent(this, WalkthroughActivity.class);
         prefManager.setInitDataPrepared(true);

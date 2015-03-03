@@ -94,7 +94,6 @@ public class ContactCategoryFragment extends Fragment implements Constants{
                     type = CONTACT_HOSPITAL;
                     break;
             }
-            Toast.makeText(getActivity(),type+"",Toast.LENGTH_LONG).show();
             Intent intent = new Intent(getActivity(), ContactListActivity.class);
             intent.putExtra("type",type);
             startActivity(intent);

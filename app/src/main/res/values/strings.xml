@@ -16,5 +16,9 @@
     <string name="doctor">Хүүхдийн эмч</string>
     <string name="masseur">Бариач</string>
     <string name="catListingNum">Жагсаалтанд %1$d байна</string>
+    <!-- Contacts detail -->
+    <string name="address">Хаяг</string>
+    <string name="phonenumbers">Холбогдох утас</string>
+    <string name="timeschedule">Ажиллах цагийн хуваарь</string>
 
 </resources>
