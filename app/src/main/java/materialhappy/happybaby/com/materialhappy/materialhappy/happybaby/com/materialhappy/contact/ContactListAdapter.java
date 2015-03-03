@@ -2,7 +2,10 @@ package materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.ma
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,7 +26,7 @@ import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.mat
  * Created by Aagii on 2/27/2015.
  */
 public class ContactListAdapter extends
-        RecyclerView.Adapter<ContactListAdapter.ViewHolder> {
+        RecyclerView.Adapter<ContactListAdapter.ViewHolder> implements Constants{
     String LOG_TAG = ContactListAdapter.class.getName();
     private Context mContext;
     private List<Contact> contacts;
@@ -62,7 +65,12 @@ public class ContactListAdapter extends
         viewHolder.name.setText(contact.getName());
 
      //   Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.contact_bg1);
-        viewHolder.imageLayout.setBackgroundResource(R.drawable.contact_bg1);
+
+
+       // Bitmap bitmap = BitmapFactory.decodeFile(mContext.getApplicationInfo().dataDir+"app_images/berry-angled2.png");
+        Drawable d = Drawable.createFromPath(mContext.getApplicationInfo().dataDir+"/"+CONTACT_IMAGES_DIR+"/berry-angled2.png");
+        viewHolder.imageLayout.setBackgroundDrawable(d);
+      //  viewHolder.imageLayout.setBackgroundResource(R.drawable.contact_bg1);
 
         if(position%2==0) {
             viewHolder.imageStatus.setBackgroundResource(R.drawable.contact_offline);

@@ -1,6 +1,8 @@
 package materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.init;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -24,6 +26,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 
@@ -70,7 +74,7 @@ public class LoadBaseDataSplashScreenActivity extends Activity implements Consta
 //                                    e.printStackTrace();
 //                                }
 
-            JsonArrayRequest req = new JsonArrayRequest("http://happybaby.mn/app/contacts.php",
+            JsonArrayRequest req = new JsonArrayRequest(URL+"/contacts.php",
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
@@ -147,7 +151,7 @@ public class LoadBaseDataSplashScreenActivity extends Activity implements Consta
                     JSONObject contactJson = (JSONObject) params[0]
                             .get(i);
 
-                    Contact contact = new Contact();
+                    final Contact contact = new Contact();
                     contact.setId(Integer.parseInt(contactJson.getString("id")));
                     contact.setType(contactJson.getString("type"));
                     contact.setName(contactJson.getString("name"));
@@ -157,6 +161,17 @@ public class LoadBaseDataSplashScreenActivity extends Activity implements Consta
                     contact.setPhone1(contactJson.getString("phonenumber1"));
                     contact.setPhone2(contactJson.getString("phonenumber2"));
                     contact.setPhone3(contactJson.getString("phonenumber3"));
+
+                    Log.d(TAG,URL+"/img/contact/"+contact.getImagePath());
+                    ImageRequest ir = new ImageRequest(URL+"/img/contact/"+contact.getImagePath(), new Response.Listener<Bitmap>() {
+                        @Override
+                        public void onResponse(Bitmap response) {
+                            saveToInternalSorage(response,contact.getImagePath());
+                         //   image.setImageBitmap(response);
+                        }
+                    }, 0, 0, null, null);
+                    HappyApplication.getInstance().getRequestQueue().add(ir);
+
                     try {
                         contactDAO = getHelper().getContactDao();
                         contactDAO.create(contact);
@@ -172,22 +187,14 @@ public class LoadBaseDataSplashScreenActivity extends Activity implements Consta
                         Toast.LENGTH_LONG).show();
             }
 
-            ImageRequest ir = new ImageRequest("http://happybaby.mn/img/happybaby/logo.png", new Response.Listener<Bitmap>() {
-                @Override
-                public void onResponse(Bitmap response) {
 
-                    image.setImageBitmap(response);
-
-                }
-            }, 0, 0, null, null);
-            HappyApplication.getInstance().getRequestQueue().add(ir);
 
             return null;
         }
 
         @Override
         protected void onPostExecute(String result) {
-            launchWalkthroughActivity();
+           // launchWalkthroughActivity();
         }
 
         @Override
@@ -225,5 +232,20 @@ public class LoadBaseDataSplashScreenActivity extends Activity implements Consta
         prefManager.setInitDataPrepared(true);
         startActivity(intent);
         finish();
+    }
+
+    private String saveToInternalSorage(Bitmap bitmapImage, String imageName){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File directory = cw.getDir(CONTACT_IMAGES_DIR, Context.MODE_PRIVATE);
+        File mypath=new File(directory,imageName);
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return directory.getAbsolutePath();
     }
 }

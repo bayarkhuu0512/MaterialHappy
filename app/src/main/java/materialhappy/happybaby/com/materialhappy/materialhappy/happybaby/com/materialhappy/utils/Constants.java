@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import android.graphics.Typeface;
 
 public interface Constants {
-	String PREF_NAME = "materialhappy";
+    public static String URL = "http://happybaby.mn/app";
+
+    String PREF_NAME = "materialhappy";
 	String PREF_INIT_DATAPREPARED = "dataPrepared";
     String PREF_INIT_WALKTHROUGHVIEWED = "walkThroughViewed";
     String PREF_INIT_TERMOFUSEACCEPTED = "termOfUseAccepted";
@@ -34,6 +36,6 @@ public interface Constants {
     public static int CONTACT_HOSPITAL = 1;
     public static int CONTACT_DOCTOR = 2;
     public static int CONTACT_MASSEUR = 3;
-
+    public static String CONTACT_IMAGES_DIR = "contactimages";
 
 }
