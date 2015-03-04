@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -32,7 +31,6 @@ import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 
 import materialhappy.happybaby.com.materialhappy.HappyApplication;
-import materialhappy.happybaby.com.materialhappy.MainActivity;
 import materialhappy.happybaby.com.materialhappy.R;
 import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.db.DatabaseHelper;
 import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.entities.Contact;
@@ -50,6 +48,7 @@ public class LoadBaseDataSplashScreenActivity extends Activity implements Consta
     private Dao<Contact, Integer> contactDAO;
     private DatabaseHelper databaseHelper = null;
     private ImageView image;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +73,7 @@ public class LoadBaseDataSplashScreenActivity extends Activity implements Consta
 //                                    e.printStackTrace();
 //                                }
 
-            JsonArrayRequest req = new JsonArrayRequest(URL+"/contacts.php",
+            JsonArrayRequest req = new JsonArrayRequest(URL + "/contacts.php",
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
@@ -155,28 +154,27 @@ public class LoadBaseDataSplashScreenActivity extends Activity implements Consta
                     contact.setId(Integer.parseInt(contactJson.getString("id")));
                     contact.setType(contactJson.getString("type"));
                     contact.setName(contactJson.getString("name"));
-                    contact.setImagePath(contactJson.getString("imagepath"));
+                    contact.setImageName(contactJson.getString("imagename"));
                     contact.setAddress(contactJson.getString("address"));
                     contact.setDistrict(contactJson.getString("district"));
                     contact.setPhone1(contactJson.getString("phonenumber1"));
                     contact.setPhone2(contactJson.getString("phonenumber2"));
                     contact.setPhone3(contactJson.getString("phonenumber3"));
-
-                    Log.d(TAG,URL+"/img/contact/"+contact.getImagePath());
-                    ImageRequest ir = new ImageRequest(URL+"/img/contact/"+contact.getImagePath(), new Response.Listener<Bitmap>() {
-                        @Override
-                        public void onResponse(Bitmap response) {
-                            saveToInternalSorage(response,contact.getImagePath());
-                         //   image.setImageBitmap(response);
-                        }
-                    }, 0, 0, null, null);
-                    HappyApplication.getInstance().getRequestQueue().add(ir);
-
                     try {
                         contactDAO = getHelper().getContactDao();
                         contactDAO.create(contact);
                     } catch (SQLException e) {
                         e.printStackTrace();
+                    }
+                    if (!contact.getImageName().isEmpty()) {
+                        Log.d(TAG, URL + "/img/contact/" + contact.getImageName());
+                        ImageRequest ir = new ImageRequest(URL + "/img/contact/" + contact.getImageName(), new Response.Listener<Bitmap>() {
+                            @Override
+                            public void onResponse(Bitmap response) {
+                                saveToInternalSorage(response, contact.getImageName());
+                            }
+                        }, 0, 0, null, null);
+                        HappyApplication.getInstance().getRequestQueue().add(ir);
                     }
                 }
 
@@ -188,13 +186,12 @@ public class LoadBaseDataSplashScreenActivity extends Activity implements Consta
             }
 
 
-
             return null;
         }
 
         @Override
         protected void onPostExecute(String result) {
-           // launchWalkthroughActivity();
+            launchWalkthroughActivity();
         }
 
         @Override
@@ -234,10 +231,10 @@ public class LoadBaseDataSplashScreenActivity extends Activity implements Consta
         finish();
     }
 
-    private String saveToInternalSorage(Bitmap bitmapImage, String imageName){
+    private String saveToInternalSorage(Bitmap bitmapImage, String imageName) {
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         File directory = cw.getDir(CONTACT_IMAGES_DIR, Context.MODE_PRIVATE);
-        File mypath=new File(directory,imageName);
+        File mypath = new File(directory, imageName);
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(mypath);

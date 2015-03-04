@@ -21,11 +21,15 @@
 
 
             <RelativeLayout
-                android:id="@+id/imageLayout"
                 android:layout_width="80dp"
-                android:background="@drawable/contact_bg1"
                 android:layout_height="match_parent">
 
+                <ImageView
+                    android:id="@+id/image"
+                    android:background="@drawable/contact_bg1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="center" />
                 <ImageView
                     android:id="@+id/imageStatus"
                     android:layout_width="10dp"

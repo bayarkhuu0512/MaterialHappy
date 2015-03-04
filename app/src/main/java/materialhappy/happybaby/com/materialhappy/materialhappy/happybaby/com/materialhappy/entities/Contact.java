@@ -96,7 +96,7 @@ public class Contact implements Serializable {
         this.phone3 = phone3;
     }
 
-    public String getImagePath() {
+    public String getImageName() {
         return imagePath;
     }
 
@@ -104,8 +104,8 @@ public class Contact implements Serializable {
         return district;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setImageName(String imageName) {
+        this.imagePath = imageName;
     }
 
     public void setDistrict(String district) {

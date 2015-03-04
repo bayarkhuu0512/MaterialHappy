@@ -27,6 +27,8 @@ import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.mat
  * Created by BayarkhuuWork on 2/15/2015.
  */
 public class ContactListActivity extends Activity implements Constants{
+    private String TAG=ContactListActivity.class.getName();
+
     private List<Contact> contacts;
     private DatabaseHelper databaseHelper = null;
     private Dao<Contact, Integer> contactDAO;

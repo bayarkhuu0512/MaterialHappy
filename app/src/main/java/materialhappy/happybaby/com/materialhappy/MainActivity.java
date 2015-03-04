@@ -21,7 +21,7 @@ import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.mat
 public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-    private String TAG=MainActivity.this.getClass().getName();
+    private String TAG=MainActivity.class.getName();
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.

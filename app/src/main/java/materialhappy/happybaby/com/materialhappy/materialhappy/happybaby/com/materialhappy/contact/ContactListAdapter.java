@@ -2,8 +2,6 @@ package materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.ma
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
@@ -27,7 +25,7 @@ import materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.mat
  */
 public class ContactListAdapter extends
         RecyclerView.Adapter<ContactListAdapter.ViewHolder> implements Constants{
-    String LOG_TAG = ContactListAdapter.class.getName();
+    String TAG = ContactListAdapter.class.getName();
     private Context mContext;
     private List<Contact> contacts;
     private Typeface roboto_light;
@@ -37,7 +35,7 @@ public class ContactListAdapter extends
         roboto_light = Typeface.createFromAsset(mContext.getAssets(),
                 Constants.ROBOTO_LIGHT);
         contacts = list;
-        Log.d(LOG_TAG, "Mlist " + contacts.size());
+        Log.d(TAG, "mlist " + contacts.size());
     }
 
     @Override
@@ -64,14 +62,13 @@ public class ContactListAdapter extends
 
         viewHolder.name.setText(contact.getName());
 
-     //   Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.contact_bg1);
-
-
-       // Bitmap bitmap = BitmapFactory.decodeFile(mContext.getApplicationInfo().dataDir+"app_images/berry-angled2.png");
-        Drawable d = Drawable.createFromPath(mContext.getApplicationInfo().dataDir+"/"+CONTACT_IMAGES_DIR+"/berry-angled2.png");
-      //  viewHolder.imageLayout.setBackgroundDrawable(d);
-      //  viewHolder.imageLayout.setBackgroundResource(R.drawable.contact_bg1);
-
+        if(!contact.getImageName().isEmpty()) {
+            Log.d(TAG,"ImageURL "+mContext.getApplicationInfo().dataDir+"/app_"+CONTACT_IMAGES_DIR+"/"+contact.getImageName()+","+contact.getName());
+            Drawable d = Drawable.createFromPath(mContext.getApplicationInfo().dataDir + "/app_" + CONTACT_IMAGES_DIR + "/" + contact.getImageName());
+            viewHolder.image.setBackgroundDrawable(d);
+        } else {
+            viewHolder.image.setBackgroundResource(R.drawable.contact_bg1);
+        }
         if(position%2==0) {
             viewHolder.imageStatus.setBackgroundResource(R.drawable.contact_offline);
         } else {
@@ -96,7 +93,7 @@ public class ContactListAdapter extends
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public RelativeLayout imageLayout;
+        public ImageView image;
         public ImageView imageStatus;
         public TextView name;
         public TextView address;
@@ -111,7 +108,7 @@ public class ContactListAdapter extends
             super(v);
             rowContainer = (LinearLayout) v.findViewById(R.id.rowContainer);
             name = (TextView) v.findViewById(R.id.name);
-            imageLayout = (RelativeLayout) v.findViewById(R.id.imageLayout);
+            image = (ImageView) v.findViewById(R.id.image);
             imageStatus  = (ImageView) v.findViewById(R.id.imageStatus);
 //            address = (TextView) v.findViewById(R.id.shortAddress);
 //            type = (TextView) v.findViewById(R.id.type);
