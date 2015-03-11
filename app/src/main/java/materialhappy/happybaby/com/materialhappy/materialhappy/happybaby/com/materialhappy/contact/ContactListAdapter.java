@@ -62,13 +62,13 @@ public class ContactListAdapter extends
 
         viewHolder.name.setText(contact.getName());
 
-        if(!contact.getImageName().isEmpty()) {
-            Log.d(TAG,"ImageURL "+mContext.getApplicationInfo().dataDir+"/app_"+CONTACT_IMAGES_DIR+"/"+contact.getImageName()+","+contact.getName());
-            Drawable d = Drawable.createFromPath(mContext.getApplicationInfo().dataDir + "/app_" + CONTACT_IMAGES_DIR + "/" + contact.getImageName());
-            viewHolder.image.setBackgroundDrawable(d);
-        } else {
-            viewHolder.image.setBackgroundResource(R.drawable.contact_bg1);
-        }
+//        if(!contact.getImageName().isEmpty()) {
+//            Log.d(TAG,"ImageURL "+mContext.getApplicationInfo().dataDir+"/app_"+CONTACT_IMAGES_DIR+"/"+contact.getImageName()+","+contact.getName());
+//            Drawable d = Drawable.createFromPath(mContext.getApplicationInfo().dataDir + "/app_" + CONTACT_IMAGES_DIR + "/" + contact.getImageName());
+//            viewHolder.image.setBackgroundDrawable(d);
+//        } else {
+//            viewHolder.image.setBackgroundResource(R.drawable.contact_bg1);
+//        }
         if(position%2==0) {
             viewHolder.imageStatus.setBackgroundResource(R.drawable.contact_offline);
         } else {

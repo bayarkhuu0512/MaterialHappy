@@ -154,28 +154,38 @@ public class LoadBaseDataSplashScreenActivity extends Activity implements Consta
                     contact.setId(Integer.parseInt(contactJson.getString("id")));
                     contact.setType(contactJson.getString("type"));
                     contact.setName(contactJson.getString("name"));
-                    contact.setImageName(contactJson.getString("imagename"));
+                    contact.setLogo(contactJson.getString("logo"));
+                    contact.setPicture(contactJson.getString("picture"));
                     contact.setAddress(contactJson.getString("address"));
-                    contact.setDistrict(contactJson.getString("district"));
+                    contact.setDistrictId(contactJson.getString("districtId"));
+                    contact.setHoroo(contactJson.getString("horoo"));
                     contact.setPhone1(contactJson.getString("phonenumber1"));
                     contact.setPhone2(contactJson.getString("phonenumber2"));
                     contact.setPhone3(contactJson.getString("phonenumber3"));
+                    contact.setConnect(contactJson.getString("connect"));
+                    contact.setWorkWeekStart(contactJson.getString("workWeekStart"));
+                    contact.setWorkWeekOver(contactJson.getString("workWeekOver"));
+                    contact.setWorkSatStart(contactJson.getString("workSatStart"));
+                    contact.setWorkSatOver(contactJson.getString("workSatOver"));
+                    contact.setWorkSunStart(contactJson.getString("workSunStart"));
+                    contact.setWorkSunOver(contactJson.getString("workSunOver"));
+
                     try {
                         contactDAO = getHelper().getContactDao();
                         contactDAO.create(contact);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
-                    if (!contact.getImageName().isEmpty()) {
-                        Log.d(TAG, URL + "/img/contact/" + contact.getImageName());
-                        ImageRequest ir = new ImageRequest(URL + "/img/contact/" + contact.getImageName(), new Response.Listener<Bitmap>() {
-                            @Override
-                            public void onResponse(Bitmap response) {
-                                saveToInternalSorage(response, contact.getImageName());
-                            }
-                        }, 0, 0, null, null);
-                        HappyApplication.getInstance().getRequestQueue().add(ir);
-                    }
+//                    if (!contact.getImageName().isEmpty()) {
+//                        Log.d(TAG, URL + "/img/contact/" + contact.getImageName());
+//                        ImageRequest ir = new ImageRequest(URL + "/img/contact/" + contact.getImageName(), new Response.Listener<Bitmap>() {
+//                            @Override
+//                            public void onResponse(Bitmap response) {
+//                                saveToInternalSorage(response, contact.getImageName());
+//                            }
+//                        }, 0, 0, null, null);
+//                        HappyApplication.getInstance().getRequestQueue().add(ir);
+//                    }
                 }
 
             } catch (JSONException e) {

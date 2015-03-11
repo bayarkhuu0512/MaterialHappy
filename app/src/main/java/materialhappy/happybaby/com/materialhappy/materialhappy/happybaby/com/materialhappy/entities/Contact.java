@@ -22,13 +22,19 @@ public class Contact implements Serializable {
     String name;
 
     @DatabaseField
-    String imagePath;
+    String logo;
+
+    @DatabaseField
+    String picture;
 
     @DatabaseField
     String address;
 
     @DatabaseField
-    String district;
+    String districtId;
+
+    @DatabaseField
+    String horoo;
 
     @DatabaseField
     String phone1;
@@ -38,6 +44,27 @@ public class Contact implements Serializable {
 
     @DatabaseField
     String phone3;
+
+    @DatabaseField
+    String connect;
+
+    @DatabaseField
+    String workWeekStart;
+
+    @DatabaseField
+    String workWeekOver;
+
+    @DatabaseField
+    String workSatStart;
+
+    @DatabaseField
+    String workSatOver;
+
+    @DatabaseField
+    String workSunStart;
+
+    @DatabaseField
+    String workSunOver;
 
     public int getId() {
         return id;
@@ -63,6 +90,21 @@ public class Contact implements Serializable {
         this.name = name;
     }
 
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 
     public String getAddress() {
         return address;
@@ -70,6 +112,22 @@ public class Contact implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getDistrictId() {
+        return districtId;
+    }
+
+    public void setDistrictId(String districtId) {
+        this.districtId = districtId;
+    }
+
+    public String getHoroo() {
+        return horoo;
+    }
+
+    public void setHoroo(String horoo) {
+        this.horoo = horoo;
     }
 
     public String getPhone1() {
@@ -96,19 +154,59 @@ public class Contact implements Serializable {
         this.phone3 = phone3;
     }
 
-    public String getImageName() {
-        return imagePath;
+    public String getConnect() {
+        return connect;
     }
 
-    public String getDistrict() {
-        return district;
+    public void setConnect(String connect) {
+        this.connect = connect;
     }
 
-    public void setImageName(String imageName) {
-        this.imagePath = imageName;
+    public String getWorkWeekStart() {
+        return workWeekStart;
     }
 
-    public void setDistrict(String district) {
-        this.district = district;
+    public void setWorkWeekStart(String workWeekStart) {
+        this.workWeekStart = workWeekStart;
+    }
+
+    public String getWorkWeekOver() {
+        return workWeekOver;
+    }
+
+    public void setWorkWeekOver(String workWeekOver) {
+        this.workWeekOver = workWeekOver;
+    }
+
+    public String getWorkSatStart() {
+        return workSatStart;
+    }
+
+    public void setWorkSatStart(String workSatStart) {
+        this.workSatStart = workSatStart;
+    }
+
+    public String getWorkSatOver() {
+        return workSatOver;
+    }
+
+    public void setWorkSatOver(String workSatOver) {
+        this.workSatOver = workSatOver;
+    }
+
+    public String getWorkSunStart() {
+        return workSunStart;
+    }
+
+    public void setWorkSunStart(String workSunStart) {
+        this.workSunStart = workSunStart;
+    }
+
+    public String getWorkSunOver() {
+        return workSunOver;
+    }
+
+    public void setWorkSunOver(String workSunOver) {
+        this.workSunOver = workSunOver;
     }
 }

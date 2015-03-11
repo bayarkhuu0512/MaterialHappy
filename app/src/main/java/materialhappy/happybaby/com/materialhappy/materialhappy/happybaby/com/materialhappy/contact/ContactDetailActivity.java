@@ -47,11 +47,11 @@ public class ContactDetailActivity extends Activity implements Constants {
             Where where = contactQb.where();
             where.eq("id", id);
             contact = contactQb.queryForFirst();
-            name.setText(contact.getName());
-            if (!contact.getImageName().isEmpty()) {
-                Drawable d = Drawable.createFromPath(getApplicationInfo().dataDir + "/app_" + CONTACT_IMAGES_DIR + "/" + contact.getImageName());
-                imageContainer.setImageDrawable(d);
-            }
+//            name.setText(contact.getName());
+//            if (!contact.getImageName().isEmpty()) {
+//                Drawable d = Drawable.createFromPath(getApplicationInfo().dataDir + "/app_" + CONTACT_IMAGES_DIR + "/" + contact.getImageName());
+//                imageContainer.setImageDrawable(d);
+//            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
