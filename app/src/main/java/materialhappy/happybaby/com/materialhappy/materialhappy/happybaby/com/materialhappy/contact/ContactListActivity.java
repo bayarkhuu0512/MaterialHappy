@@ -1,5 +1,6 @@
 package materialhappy.happybaby.com.materialhappy.materialhappy.happybaby.com.materialhappy.contact;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +8,9 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
@@ -37,6 +41,9 @@ public class ContactListActivity extends Activity implements Constants{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contact_view);
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         Intent intent = getIntent();
         int type = intent.getIntExtra("type", CONTACT_HOSPITAL);
 
@@ -86,11 +93,29 @@ public class ContactListActivity extends Activity implements Constants{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+/*
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+*/
+            case R.id.action_search:
+                Log.d(TAG, "Search");
+                return true;
+            case R.id.action_filter:
+                Log.d(TAG, "Filter");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.contact, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }
